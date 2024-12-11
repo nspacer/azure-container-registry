@@ -1,0 +1,7 @@
+az group list  
+rg=<RESOURCE_GROUP_NAME> name=acrlabdemo acr="$name$RANDOM"
+az acr create --resource-group $rg --name $acr --sku Basic  
+az acr update -n $acr --admin-enabled true
+echo FROM mcr.microsoft.com/hello-world > Dockerfile 
+az acr build --image sample/hello-world:v1 --registry $acr --file Dockerfile .
+az container logs --resource-group $rg --name lamdemo9438
